@@ -1,0 +1,2255 @@
+/* Modern CSS Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #0056b3;
+    --secondary-color: #00a8e8;
+    --accent-sun: #ffc107; /* Солнечный акцент */
+    --sea-gradient: linear-gradient(135deg, #006994 0%, #0056b3 100%);
+    --sun-gradient: linear-gradient(135deg, #ffdb4d 0%, #ffc107 100%);
+    --text-color: #333333;
+    --bg-color: #ffffff;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --container-width: 1200px;
+    --spacing-unit: 1rem;
+    --header-height: 96px;
+    --header-height-scrolled: 76px;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    /* Firefox scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 86, 179, 0.55) rgba(0, 0, 0, 0.08);
+}
+
+/* WebKit scrollbar (Chrome / Edge / Safari) */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(0, 86, 179, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 86, 179, 0.75);
+    background-clip: content-box;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+/* Utilities */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-unit);
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+
+/* ============================================
+   BUTTON ARCHITECTURE - Modern Professional
+   ============================================ */
+
+/* Base Button Styles */
+.btn-primary, .btn-secondary, .yacht-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    
+    /* Photo Background */
+    background-image: url('/src/assets/images/button-texture.png');
+    background-size: 200%;
+    background-repeat: no-repeat;
+    
+    /* Clean border - no artifacts */
+    border: none;
+    outline: none;
+    
+    /* Clip pseudo-elements to button shape */
+    overflow: hidden;
+    isolation: isolate;
+    
+    /* Smooth transitions */
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background-position 0.6s ease;
+    
+    /* External shadow only */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Overlay Layer (::before) */
+.btn-primary::before,
+.btn-secondary::before,
+.yacht-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: -1;
+    transition: background 0.3s ease;
+    border-radius: inherit;
+}
+
+/* Animated Border Glow (::after) */
+.btn-primary::after,
+.btn-secondary::after,
+.yacht-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    
+    /* Border glow - invisible by default */
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0),
+                inset 0 0 20px rgba(255, 255, 255, 0);
+    transition: box-shadow 0.4s ease;
+}
+
+/* Hover: Animated border appears */
+.btn-primary:hover::after,
+.yacht-btn:hover::after {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5),
+                inset 0 0 25px rgba(100, 200, 255, 0.2);
+}
+
+.btn-secondary:hover::after {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.6),
+                inset 0 0 25px rgba(220, 190, 140, 0.25);
+}
+
+/* ---- SEA THEME (Primary & Yacht) ---- */
+.btn-primary, .yacht-btn {
+    background-position: 100% 100%;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Yacht button: shift texture to avoid "gray" zone */
+.yacht-btn {
+    background-position: 35% 55%;
+}
+
+.btn-primary:hover, .yacht-btn:hover {
+    transform: translateY(-3px);
+    background-position: 85% 85%;
+    box-shadow: 0 8px 25px rgba(0, 100, 150, 0.35);
+}
+
+.yacht-btn:hover {
+    background-position: 55% 45%;
+}
+
+.btn-primary:hover::before, .yacht-btn:hover::before {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:active, .yacht-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:active::before, .yacht-btn:active::before {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Focus state for accessibility */
+.btn-primary:focus-visible, .yacht-btn:focus-visible {
+    outline: 3px solid rgba(0, 150, 200, 0.5);
+    outline-offset: 2px;
+}
+
+/* ---- SAND THEME (Secondary) ---- */
+.btn-secondary {
+    background-position: 0% 0%;
+    color: #3d3225;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-secondary::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    background-position: 15% 15%;
+    box-shadow: 0 8px 25px rgba(166, 142, 116, 0.35);
+}
+
+.btn-secondary:hover::before {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:active::before {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary:focus-visible {
+    outline: 3px solid rgba(200, 170, 120, 0.5);
+    outline-offset: 2px;
+}
+
+/* ---- YACHT BUTTON (Card specific) ---- */
+.yacht-btn {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    border-radius: 14px;
+    font-size: 0.95rem;
+}
+
+/* ---- CALL BUTTON (Header Pulse) ---- */
+.btn-call {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    transition: all 0.3s ease;
+    z-index: 1;
+    /* Убираем overflow: hidden чтобы было видно пульсацию */
+    overflow: visible;
+    isolation: isolate;
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+    white-space: nowrap;
+}
+
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.header-phone {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 12px;
+    transition: color 0.25s ease, background-color 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.header-phone:hover {
+    background-color: rgba(0, 0, 0, 0.32);
+}
+
+.header.scrolled .header-phone {
+    color: var(--text-color);
+}
+
+.header.scrolled .header-phone:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.btn-call:hover {
+    background-color: #004494;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 86, 179, 0.4);
+}
+
+.btn-call svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-call:hover svg {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* Pulse Animation Waves */
+.btn-call::before,
+.btn-call::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background-color: var(--primary-color);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-call::before {
+    animation: wave-pulse 2.5s infinite ease-out;
+}
+
+.btn-call::after {
+    animation: wave-pulse 2.5s infinite ease-out;
+    animation-delay: 0.8s;
+}
+
+@keyframes wave-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.3, 1.5); /* Уменьшенный размах */
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   HEADER - Drop Effect Menu
+   ============================================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-bar {
+    position: relative;
+    background-color: transparent;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+    z-index: 2;
+}
+
+.header.scrolled .header-bar {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header.menu-open .header-bar,
+.header.menu-closing .header-bar {
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: none;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    gap: 1.5rem;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.header.scrolled .logo-img {
+    transform: scale(0.85);
+}
+
+.nav-desktop {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--white);
+    padding: 0.3rem 0;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+    /* Ensure underline stays within text bounds */
+    right: 0;
+    margin: 0 auto;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    /* Prevent overflow on mobile */
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.header.scrolled .nav-desktop .nav-link {
+    color: var(--text-color);
+}
+
+.nav-mobile .nav-link {
+    color: var(--text-color);
+    padding: 0.3rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+    display: inline-block;
+}
+
+.nav-mobile li:last-child .nav-link {
+    border-bottom: none;
+}
+
+/* Mobile-specific underline fix */
+@media (max-width: 768px) {
+    .nav-mobile .nav-link::after {
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+}
+
+/* Header Dropdown - Drop Effect */
+.header-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 0 1rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform-origin: top center;
+    transform: scaleY(0.12);
+    clip-path: ellipse(10% 10% at 50% 0%);
+    transition: opacity 0.2s ease, padding 0.2s ease;
+    border-radius: 0 0 24px 24px;
+    box-shadow: none;
+    z-index: 1;
+}
+
+.header.menu-open .header-dropdown {
+    max-height: 320px;
+    opacity: 1;
+    padding: 0.5rem 1.5rem 1.5rem;
+    animation: dropdown-drop-open 0.9s linear both;
+}
+
+.header.menu-closing .header-dropdown {
+    max-height: 320px;
+    opacity: 1;
+    padding: 0.5rem 1.5rem 1.5rem;
+    animation: dropdown-drop-close 0.9s linear both;
+}
+
+.header-dropdown .nav-mobile {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition-delay: 0s;
+}
+
+.header.menu-open .header-dropdown .nav-mobile {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.28s;
+}
+
+.header.menu-closing .header-dropdown .nav-mobile {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition-delay: 0s;
+}
+
+@keyframes dropdown-drop-open {
+    0% {
+        transform: scaleY(0.12);
+        clip-path: ellipse(10% 10% at 50% 0%);
+    }
+    82% {
+        transform: scaleY(1.06);
+        clip-path: ellipse(150% 80% at 50% 0%);
+    }
+    100% {
+        transform: scaleY(1);
+        clip-path: ellipse(175% 125% at 50% 0%);
+    }
+}
+
+@keyframes dropdown-drop-close {
+    0% {
+        transform: scaleY(1);
+        clip-path: ellipse(175% 125% at 50% 0%);
+    }
+    82% {
+        transform: scaleY(0.28);
+        clip-path: ellipse(55% 40% at 50% 0%);
+    }
+    100% {
+        transform: scaleY(0.12);
+        clip-path: ellipse(10% 10% at 50% 0%);
+    }
+}
+
+/* Overlay */
+.header-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+.header.menu-open ~ .header-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.header.menu-closing ~ .header-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Burger Button - Modern 2-line */
+.burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.burger:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.header.scrolled .burger {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.header.scrolled .burger:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.burger-line {
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+}
+
+.burger-line:nth-child(1) {
+    top: 16px;
+}
+
+.burger-line:nth-child(2) {
+    top: 26px;
+}
+
+.header.scrolled .burger-line {
+    background: var(--text-color);
+}
+
+.header.menu-open .burger {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.header.menu-open .burger-line {
+    background: var(--text-color);
+}
+
+.header.menu-open .burger-line:nth-child(1) {
+    top: 21px;
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.header.menu-open .burger-line:nth-child(2) {
+    top: 21px;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    padding-top: var(--header-height);
+    overflow: hidden;
+    background-color: #1a1a1a;
+    z-index: 10;
+}
+
+/* Эффект интеграции: вогнутый низ (Fleet поднимается внутрь) */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Скрываем стык */
+    left: 0;
+    width: 100%;
+    height: 120px; /* Глубина изгиба */
+    background: var(--light-bg); /* Цвет следующей секции */
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0; /* Форма холма/волны */
+    transform: scaleX(1.5);
+    z-index: 2;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .hero::after {
+        height: 60px;
+        transform: scaleX(2);
+    }
+}
+
+/* Общие стили для слайдов и видео */
+.hero-video, 
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* Видео (первый слайд) */
+.hero-video.active.loaded {
+    opacity: 1;
+}
+
+/* Soft skeleton placeholder for hero/hero-video */
+.hero-skeleton {
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #111 0%, #171717 100%);
+    z-index: 1; /* same as .hero-video; placed after in DOM so it overlays the video */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    pointer-events: none;
+}
+
+.hero-skeleton::after {
+    /* subtle soft plate in center to emulate content area */
+    content: '';
+    width: 60%;
+    height: 60%;
+    max-width: 1200px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45) inset;
+}
+
+.skeleton-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.035) 50%, rgba(255,255,255,0.00) 100%);
+    animation: shimmer 1.6s linear infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Hide skeleton when video is ready */
+.hero-skeleton.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Фото-слайды */
+.hero-slide {
+    transform: scale(1);
+    /* Плавный переход для прозрачности (1.5с) и масштаба (6с - эффект Ken Burns) */
+    transition: opacity 1.5s ease-in-out, transform 6s ease-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1.1); /* Медленное увеличение при показе */
+}
+
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,1) 100%); /* Виньетка */
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+    max-width: 900px; /* Ограничиваем ширину контента */
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero-title-accent {
+    font-family: 'Times New Roman', Times, Baskerville, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+/* Ensure content is above the curve */
+.hero-content {
+    padding-bottom: 50px; /* Space for the curve */
+}
+
+/* Removed old btn-secondary style to unify with new button logic above */
+
+
+/* Fleet Section */
+.fleet {
+    background-color: var(--light-bg);
+    padding: 0 0 5rem 0 ;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: -2rem; /* Pull closer to title */
+    margin-bottom: 2rem;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.yacht-card {
+    background: var(--white);
+    border-radius: 24px; /* More rounded corners */
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.yacht-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.yacht-image-wrapper {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* Изменяем курсор на стильную стрелку при наведении на галерею */
+.yacht-image-wrapper:has(.yacht-image-gallery),
+.yacht-image-wrapper.yacht-gallery-active {
+    cursor: url('/src/assets/images/cursor-arrow.svg') 16 16, ew-resize;
+}
+
+.yacht-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.yacht-card:hover .yacht-image {
+    transform: scale(1.05);
+}
+
+/* Gallery overlay for hover frames */
+.yacht-image-gallery {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Skeleton shown immediately on hover while gallery images load */
+.yacht-gallery-skeleton {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3; /* above images but below price */
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 100%);
+    background-size: 200% 100%;
+    animation: yacht-skeleton-shimmer 1.2s linear infinite;
+}
+
+@keyframes yacht-skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.yacht-image-gallery img, .yacht-gallery-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 220ms ease;
+    display: block;
+    opacity: 1;
+}
+
+/* Indicators (dots) */
+.yacht-gallery-indicators {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.yacht-gallery-dot {
+    width: 10px;
+    height: 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    display: inline-block;
+    border: none;
+    padding: 0;
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), background 220ms ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.yacht-gallery-dot:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,0.1); }
+
+.yacht-gallery-dot.active {
+    transform: scale(1.4);
+    background: white;
+}
+
+.yacht-price {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    color: var(--text-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(4px);
+    transition: opacity 200ms ease;
+    z-index: 6; /* keep price above gallery images */
+}
+
+/* Gallery z-indexing */
+.yacht-image-gallery { z-index: 2; }
+.yacht-gallery-img { z-index: 1; }
+
+.yacht-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /* Ensure proper alignment on mobile */
+    height: 100%;
+}
+
+.yacht-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.yacht-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.yacht-capacity {
+    background: #f0f2f5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.yacht-description {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    flex-grow: 1;
+    /* Ensure proper spacing on mobile */
+    flex-shrink: 0;
+}
+
+/* Yacht Button - Configured above in the group block */
+/* Keeping this empty to override any old styles if they exist elsewhere */
+
+/* ============================================
+   CTA YACHT BUTTON - Modern Unique Design
+   ============================================ */
+
+.cta-yacht-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, #007bff 0%, #00a8e8 50%, #0056b3 100%);
+    border: none;
+    outline: none;
+    overflow: hidden;
+    isolation: isolate;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 123, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    min-width: 280px;
+}
+
+.cta-yacht-btn i {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-yacht-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-yacht-btn .btn-effect {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    z-index: 1;
+}
+
+.cta-yacht-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 168, 232, 0.2) 0%, rgba(0, 86, 179, 0.2) 100%);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.cta-yacht-btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #00a8e8, #007bff, #0056b3);
+    border-radius: 52px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+.cta-yacht-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(0, 123, 255, 0.4);
+}
+
+.cta-yacht-btn:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.cta-yacht-btn:hover .btn-effect {
+    opacity: 1;
+}
+
+.cta-yacht-btn:hover::before {
+    opacity: 1;
+}
+
+.cta-yacht-btn:hover::after {
+    opacity: 0.3;
+}
+
+.cta-yacht-btn:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+.cta-yacht-btn:focus-visible {
+    outline: 3px solid rgba(0, 150, 200, 0.5);
+    outline-offset: 3px;
+}
+
+/* Mobile responsive for CTA button */
+@media (max-width: 768px) {
+    .cta-yacht-btn {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        min-width: 240px;
+    }
+
+    .cta-yacht-btn i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-yacht-btn {
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+        min-width: 200px;
+    }
+
+    .cta-yacht-btn i {
+        font-size: 1.1rem;
+    }
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    color: var(--white);
+    padding: 3.5rem 0 2rem;
+    background: radial-gradient(1200px 420px at 20% 0%, rgba(0, 168, 232, 0.22) 0%, rgba(0, 168, 232, 0) 60%),
+                radial-gradient(900px 340px at 90% 20%, rgba(0, 86, 179, 0.28) 0%, rgba(0, 86, 179, 0) 55%),
+                #0f2235;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%);
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.4fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.footer-col {
+    min-width: 0;
+}
+
+.footer-brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-logo-img {
+    height: 44px;
+    width: auto;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.28));
+}
+
+.footer-text {
+    margin-top: 1rem;
+    max-width: 34ch;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.footer-col-title {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    margin-bottom: 0.75rem;
+}
+
+.footer-link {
+    display: inline-flex;
+    padding: 0.25rem 0;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.footer-link:hover {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer-link:focus-visible {
+    outline: 3px solid rgba(0, 168, 232, 0.45);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+.footer-address {
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-style: normal;
+}
+
+.footer-social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.92);
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-social-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--white);
+}
+
+.footer-social-link:focus-visible {
+    outline: 3px solid rgba(0, 168, 232, 0.45);
+    outline-offset: 3px;
+}
+
+.footer-social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.footer-bottom {
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+    
+    .logo {
+        display: none;
+    }
+    
+    .burger {
+        display: block;
+    }
+    
+    .header-dropdown {
+        display: block;
+    }
+    
+    .nav {
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+    
+    .header-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header .btn-call {
+        order: -1;
+        padding: 0.7rem 1.4rem;
+        font-size: 0.9rem;
+    }
+
+    .header-phone {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 2.25rem;
+    }
+    
+    .section-title {
+        font-size: 1.9rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.98rem;
+    }
+    
+    .hero-subtitle br {
+        display: none;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.85rem 2rem;
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+    
+    .fleet {
+        padding: 3.5rem 0;
+    }
+    
+    .fleet-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    /* Maintain the column order: image -> content -> CTA */
+    .yacht-image-wrapper {
+        height: 220px;
+    }
+    
+    .yacht-content {
+        padding: 1.25rem;
+    }
+
+    .yacht-header {
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .yacht-title {
+        font-size: 1.35rem;
+    }
+
+    .yacht-description {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Keep price as an overlay on the image, but slightly smaller for better fit */
+    .yacht-price {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* CTA becomes touch-friendly full width */
+    .yacht-btn {
+        width: 100%;
+        max-width: none;
+        align-self: stretch;
+        justify-content: center;
+        padding: 0.95rem 1rem;
+        margin-top: 1rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: stretch;
+    }
+}
+
+@media (max-width: 1100px) {
+    .header-phone {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .btn-call {
+        padding: 0.75rem 1.4rem;
+        font-size: 0.9rem;
+    }
+
+    .nav-desktop {
+        gap: 1.5rem;
+    }
+
+    .logo-img {
+        max-width: 160px;
+    }
+}
+
+/* Tablet (<=1024px) — keep column order, tighten spacing, improve alignment */
+@media (max-width: 1024px) {
+    .fleet-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.6rem;
+    }
+
+    .yacht-image-wrapper {
+        height: 240px; /* slightly reduced but still prominent */
+    }
+
+    .yacht-content {
+        padding: 1.5rem;
+    }
+
+    .yacht-header {
+        align-items: center; /* align title and capacity baseline */
+        gap: 0.5rem;
+    }
+
+    .yacht-title {
+        font-size: 1.35rem;
+        line-height: 1.15;
+    }
+
+    .yacht-description {
+        font-size: 0.96rem;
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+
+    .yacht-price {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .yacht-btn {
+        margin-top: 1rem;
+        padding: 0.85rem 1.2rem;
+        width: auto;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 900px) {
+    .header-phone {
+        display: none;
+    }
+}
+
+/* Small mobile devices (480px and below) */
+@media (max-width: 480px) {
+    :root {
+        --spacing-unit: 0.75rem;
+    }
+    
+    .header .btn-call {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .logo-img {
+        height: 48px;
+        width: auto;
+    }
+    
+    .hero {
+        min-height: 460px;
+        padding-top: var(--header-height);
+    }
+    
+    .hero-title {
+        font-size: 1.95rem;
+    }
+    
+    /* Ensure line break works on small screens */
+    .hero-title br {
+        display: block; /* force line break on mobile */
+        line-height: 1.05;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 1.6rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.98rem;
+        margin-top: -1rem;
+    }
+    
+    /* Tighten yacht card spacing for small screens */
+    .yacht-title {
+        font-size: 1.2rem;
+    }
+    
+    .yacht-description {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.55;
+    }
+    
+    .yacht-price {
+        bottom: 0.9rem;
+        right: 0.9rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.88rem;
+    }
+    
+    /* Center booking button inside the card on very small screens */
+    .yacht-btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+        width: auto; /* let content define width so it can be centered */
+        min-width: 320px;
+        max-width: 480px;
+        margin-top: 1rem;
+        align-self: center; /* center horizontally within .yacht-content */
+        justify-content: center;
+    }
+    
+    .footer {
+        padding: 2rem 0;
+    }
+}
+
+/* Extra small devices (368px and below) */
+@media (max-width: 368px) {
+    :root {
+        --spacing-unit: 0.5rem;
+        --header-height: 76px;
+        --header-height-scrolled: 64px;
+    }
+    
+    html {
+        font-size: 14px;
+    }
+    
+    .header .btn-call {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+        border-radius: 30px;
+    }
+    
+    .header .btn-call svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .logo-img {
+        height: 40px;
+        width: auto;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 20px;
+    }
+    
+    .hero {
+        height: auto;
+        min-height: 500px;
+        padding-top: calc(var(--header-height) + 1rem);
+        padding-bottom: 7rem;
+        align-items: center;
+    }
+
+    .hero::after {
+        height: 50px;
+        transform: scaleX(2);
+    }
+    
+    .hero-content {
+        padding: 0 1rem;
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+    }
+    
+    .hero-buttons {
+        gap: 0.5rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.8rem;
+        max-width: 240px;
+    }
+    
+    .fleet {
+        padding: 0 0 2.5rem;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+        margin-top: -1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .fleet-grid {
+        gap: 1rem;
+    }
+    
+    .yacht-card {
+        border-radius: 16px;
+    }
+    
+    .yacht-image-wrapper {
+        height: 180px;
+    }
+    
+    .yacht-content {
+        padding: 1rem;
+    }
+    
+    .yacht-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .yacht-title {
+        font-size: 1.1rem;
+        flex: 1 1 100%;
+    }
+    
+    .yacht-capacity {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .yacht-description {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .yacht-price {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .yacht-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        margin-top: auto;
+    }
+    
+    .footer {
+        padding: 1.5rem 0;
+    }
+    
+    .footer-grid {
+        gap: 1.25rem;
+    }
+
+    .footer-logo-img {
+        height: 40px;
+    }
+
+    .footer-link {
+        font-size: 0.9rem;
+    }
+    
+    .footer-social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-social-link {
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   REVIEWS SECTION - 2GIS Style
+   ============================================ */
+
+.reviews {
+    background: linear-gradient(180deg, var(--white) 0%, var(--light-bg) 100%);
+    padding: 5rem 0;
+    position: relative;
+}
+
+.reviews::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 168, 232, 0.03) 100%);
+    pointer-events: none;
+}
+
+.reviews .section-header {
+    margin-bottom: 5rem;
+}
+
+.reviews-rating-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: -1.5rem;
+}
+
+.reviews-stars {
+    color: #ffc107;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.reviews-score {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.reviews-count {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.review-card {
+    background: var(--light-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.review-author-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.review-author {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-date {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.review-rating {
+    color: #ffc107;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.review-text {
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.reviews-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.reviews-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #3dba4e 0%, #2ea043 100%);
+    color: var(--white);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(46, 160, 67, 0.25);
+}
+
+.reviews-source:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 160, 67, 0.35);
+}
+
+.reviews-source-icon {
+    background: var(--white);
+    color: #2ea043;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Reviews Responsive */
+@media (max-width: 768px) {
+    .reviews {
+        padding: 3rem 0;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .reviews-rating-summary {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .reviews-stars {
+        font-size: 1.25rem;
+    }
+    
+    .reviews-score {
+        font-size: 1.25rem;
+    }
+    
+    .review-card {
+        padding: 1.25rem;
+    }
+    
+    .review-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .review-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews {
+        padding: 2.5rem 0;
+    }
+    
+    .reviews .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .reviews-rating-summary {
+        margin-top: -1rem;
+    }
+    
+    .review-card {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .review-header {
+        gap: 0.5rem;
+    }
+    
+    .review-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+    
+    .review-author {
+        font-size: 0.9rem;
+    }
+    
+    .review-date {
+        font-size: 0.75rem;
+    }
+    
+    .review-rating {
+        font-size: 0.8rem;
+    }
+    
+    .review-text {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+    
+    .reviews-footer {
+        margin-top: 2rem;
+    }
+    
+    .reviews-source {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Location Section */
+.location-section {
+    background: linear-gradient(135deg, rgba(0, 168, 232, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.location-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230056b3' fill-opacity='0.02'%3E%3Cpath d='M30 0c16.569 0 30 13.431 30 30s-13.431 30-30 30S0 46.569 0 30 13.431 0 30 0zm0 8c-12.15 0-22 9.85-22 22s9.85 22 22 22 22-9.85 22-22-9.85-22-22-22z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.location-section .section-title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 3rem;
+}
+
+.map-wrapper {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 
+        0 25px 50px rgba(0, 86, 179, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    height: 500px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 86, 179, 0.1);
+}
+
+.map-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    border-radius: 34px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.map-wrapper:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 35px 70px rgba(0, 86, 179, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.9),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.map-wrapper:hover::before {
+    opacity: 0.1;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+/* Декоративные элементы */
+.location-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.location-wave {
+    position: absolute;
+    opacity: 0.1;
+    fill: var(--secondary-color);
+}
+
+.location-wave-1 {
+    top: 10%;
+    right: -10%;
+    width: 300px;
+    height: 150px;
+    animation: waveFloat 15s ease-in-out infinite;
+}
+
+.location-wave-2 {
+    bottom: 20%;
+    left: -5%;
+    width: 200px;
+    height: 100px;
+    animation: waveFloat 12s ease-in-out infinite reverse;
+}
+
+.location-cta {
+    text-align: center;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.location-cta .yacht-btn {
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-width: 250px;
+    box-shadow: 0 8px 25px rgba(0, 86, 179, 0.25);
+}
+
+.location-cta .yacht-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 86, 179, 0.35);
+}
+
+@keyframes waveFloat {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(20px) translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .location-section {
+        padding: 4rem 0;
+    }
+    
+    .map-wrapper {
+        height: 400px;
+        border-radius: 24px;
+    }
+    
+    .map-container {
+        border-radius: 22px;
+    }
+    
+    .location-wave-1 {
+        width: 200px;
+        height: 100px;
+    }
+    
+    .location-wave-2 {
+        width: 150px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 480px) {
+    .location-section {
+        padding: 3rem 0;
+    }
+    
+    .map-wrapper {
+        height: 350px;
+        border-radius: 20px;
+    }
+    
+    .map-container {
+        border-radius: 18px;
+    }
+    
+    .location-wave {
+        display: none;
+    }
+}
+
+@media (max-width: 368px) {
+    .reviews {
+        padding: 2rem 0;
+    }
+    
+    .reviews-stars {
+        font-size: 1rem;
+    }
+    
+    .reviews-score {
+        font-size: 1rem;
+    }
+    
+    .reviews-count {
+        font-size: 0.85rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .review-card {
+        padding: 0.875rem;
+    }
+    
+    .review-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+    
+    .review-text {
+        font-size: 0.8rem;
+    }
+    
+    .reviews-source {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.85rem;
+        gap: 0.5rem;
+    }
+    
+    .reviews-source-icon {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
