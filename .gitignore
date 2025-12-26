@@ -7,47 +7,11 @@ dist/
 build/
 *.js
 
+# Editors
+.vscode/
+
 # Environment
 .env
 .env.local
 *.env.*
-
-# Editors
-.vscode/
-.idea/
-
-# Logs
-*.log
-
-# Python (if present)
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Temp files
-*.tmp
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Testing
-.mypy_cache/
-.pytest_cache/
-
-# Java/Gradle (if present)
-target/
-.gradle/
-
-# Virtual environments
-.venv/
-venv/
 ```

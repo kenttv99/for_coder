@@ -8,6 +8,13 @@
   min-height: 100vh;
 }
 
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
 /* Reset default styles that might interfere with our hero section */
 * {
   box-sizing: border-box;
