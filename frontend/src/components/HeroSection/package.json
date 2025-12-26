@@ -1,0 +1,25 @@
+{
+  "name": "@components/herosection",
+  "version": "1.0.0",
+  "description": "Unconventional hero section component for yacht rental website",
+  "main": "HeroSection.jsx",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "react",
+    "hero",
+    "section",
+    "yacht",
+    "rental",
+    "sochi",
+    "design",
+    "animation"
+  ],
+  "author": "Designer",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
